@@ -1,0 +1,162 @@
+/* ------------------- Popup ------------------- */
+
+/* Fond semi-transparent couvrant tout l'écran pour la popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
+  display: none; /* Invisible par défaut */
+  justify-content: center; /* Centrage horizontal */
+  align-items: center; /* Centrage vertical */
+  z-index: 9999; /* Priorité élevée */
+}
+
+/* Affichage de la popup lorsqu'on lui ajoute la classe 'visible' */
+.popup.visible {
+  display: flex;
+}
+
+/* Contenu de la popup */
+.popup-content {
+  background-color: var(
+    --popup-bg-color,
+    white
+  ); /* Utilise une variable pour s'adapter au thème */
+  color: var(--text-color); /* Texte selon le thème */
+  padding: 20px 30px;
+  border-radius: 8px;
+  text-align: center;
+  width: 30%;
+}
+
+/* ------------------- Variables CSS : couleurs par défaut ------------------- */
+
+/* Valeurs par défaut du thème clair */
+:root {
+  --bg-color: #ffffff; /* Fond clair */
+  --text-color: #222222; /* Texte foncé */
+  --popup-bg-color: white; /* Fond de popup par défaut */
+}
+
+/* Thème sombre : lorsqu'on ajoute data-theme="dark" à <body> */
+body[data-theme="dark"] {
+  --bg-color: #121212; /* Fond sombre */
+  --text-color: #f0f0f0; /* Texte clair */
+  --popup-bg-color: #333333; /* Fond de la popup en mode sombre */
+}
+
+/* Applique les couleurs définies par les variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Transition fluide entre les thèmes */
+}
+
+/* ------------------- Bouton de changement de thème ------------------- */
+
+/* Style général du bouton */
+#theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 14px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Effet de survol du bouton */
+#theme-toggle:hover {
+  opacity: 0.8;
+  background-color: #f0f0f0; /* Fond clair au survol */
+  color: #121212; /* Texte sombre au survol */
+  transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+}
+
+/* Thème clair : bouton sombre */
+body[data-theme="light"] #theme-toggle {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+/* Thème sombre : bouton clair */
+body[data-theme="dark"] #theme-toggle {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+/* ------------------- Animation lors du scroll ------------------- */
+
+/* Classe de base pour animer un élément lors du scroll */
+.animate-on-scroll {
+  opacity: 0; /* Caché au départ */
+  transition: opacity 1s ease-in-out; /* Transition douce */
+}
+
+/* Quand l'élément devient visible, on lui retire l'opacité */
+.animate-on-scroll.hidden {
+  opacity: 1;
+}
+
+/* ------------------- Carrousel ------------------- */
+
+/* Conteneur principal du carrousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Piste contenant les images */
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Chaque image dans le carrousel */
+.carousel-img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Boutons de navigation (précédent et suivant) */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 15px;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+/* Positionnement du bouton précédent */
+.carousel-btn.prev {
+  left: 10px;
+}
+
+/* Positionnement du bouton suivant */
+.carousel-btn.next {
+  right: 10px;
+}
+
+/* Effet de survol des boutons du carrousel */
+.carousel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1); /* Agrandissement au survol */
+  transition: background-color 0.3s, transform 0.3s;
+}
